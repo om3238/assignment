@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src":"assignment/wsgi.py",
+            "use":"@versel/python",
+            "config":{"maxLambdaSize":"15mb","runtime":"Python3.9"}
+        },
+        {
+            "src": "build_files.sh",
+            "use":"@versel/static-build",
+            "config":{
+                "distDir":"staticfiles_build"
+            }
+        }
+    ],
+    "routes":[
+        {
+            "src":"/static/(.*)",
+            "dest":"/static/$1"
+        },
+        {            
+            "src":"/(.*)",
+            "dest":"assignment/wsgi.py"
+        }
+    ]
+}
